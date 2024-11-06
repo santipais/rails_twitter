@@ -5,6 +5,7 @@ ruby "3.3.4"
 
 gem "rails", "~> 7.0.8", ">= 7.0.8.6"
 gem "bootsnap", require: false
+gem "devise", "~> 4.9"
 gem "importmap-rails"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
@@ -21,6 +22,3 @@ end
 group :development do
   gem "web-console"
 end
-
-
-gem "devise", "~> 4.9"
