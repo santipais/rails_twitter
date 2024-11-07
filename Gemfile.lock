@@ -85,6 +85,11 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
     erubi (1.13.0)
+    factory_bot (6.5.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
@@ -197,6 +202,8 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
+    shoulda-matchers (6.4.0)
+      activesupport (>= 5.2.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -247,12 +254,14 @@ DEPENDENCIES
   bootsnap
   debug
   devise (~> 4.9)
+  factory_bot_rails (~> 6.4, >= 6.4.4)
   faker (~> 3.5, >= 3.5.1)
   importmap-rails
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.6)
   rspec-rails (~> 7.0, >= 7.0.1)
+  shoulda-matchers (~> 6.4)
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
