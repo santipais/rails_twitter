@@ -40,6 +40,10 @@ Metrics/PerceivedComplexity:
   Exclude:
     - db/migrate/*
 
+Rails/NotNullColumn:
+  Exclude:
+    - db/migrate/20241107190538_add_jti_to_user.rb
+
 Rails/UnknownEnv:
   Environments:
     - development
