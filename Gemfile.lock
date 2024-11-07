@@ -71,6 +71,7 @@ GEM
     ast (2.4.2)
     bcrypt (3.1.20)
     bindex (0.8.1)
+    blueprinter (1.1.2)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
     builder (3.3.0)
@@ -294,6 +295,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  blueprinter (~> 1.1, >= 1.1.2)
   bootsnap
   debug
   devise (~> 4.9)
