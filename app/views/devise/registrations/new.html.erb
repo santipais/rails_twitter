@@ -1,0 +1,42 @@
+<div class="w-screen h-screen flex">
+  <div class="max-w-[37.5rem] max-h-[46.875rem] w-full h-full m-auto rounded rounded-lg shadow-[0_0_20px_0_rgba(0,0,0,0.15)] flex flex-wrap">
+    <h3 class="heading-3 m-6">Step 2 of 3</h3>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full mx-14 flex flex-col gap-y-5" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <h2 class="heading-2 mb-2.5">Create your account</h2>
+
+      <div class="w-full">
+        <%= f.email_field :email, autocomplete: "email ", placeholder: "Email", class: "input" %>
+      </div>
+
+      <div class="w-full">
+        <%= f.password_field :password, autocomplete: "password", placeholder: "Password", class: "input" %>
+      </div>
+
+
+      <%= f.submit "Next", class: "btn btn-dark btn-lg" %>
+    <% end %>
+  </div>
+</div>
+
+<!-- >
+<div class = "signup">
+    <div class="create-text">
+      Create your account
+    </div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input-field", placeholder: "Email" %>
+        <% if @minimum_password_length %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "input-field", placeholder: "Password (#{@minimum_password_length} Minimum Characters)" %>
+        <%else%>
+          <%= f.password_field :password, autocomplete: "new-password", class: "input-field", placeholder: "Password" %>
+        <%end%>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input-field", placeholder: "Password Confirmation" %>
+
+        <%= f.submit "Sign up", class: "submit" %>
+    <% end %>
+    <%= render "devise/shared/links" %>
+</div>  
