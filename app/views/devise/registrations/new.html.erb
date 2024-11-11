@@ -9,9 +9,12 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="w-full">
-        <%= f.email_field :email, autocomplete: "email ", placeholder: "Email", class: "input-field" %>
+        <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "input-field" %>
       </div>
 
+      <div class="w-full">
+        <%= f.text_field :username, autocomplete: "username", placeholder: "Username", class: "input-field" %>
+      </div>
 
       <div class="w-full">
         <%= f.password_field :password, autocomplete: "password", placeholder: "Password", class: "input-field" %>
