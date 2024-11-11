@@ -6,7 +6,7 @@ module Users
 
     def sign_up_params
       params.require(resource_name)
-            .permit(:name, :email, :password, :username)
+            .permit(:name, :email, :password, :password_confirmation, :username)
     end
   end
 end
