@@ -1,1 +1,9 @@
+<% if user_signed_in? %> 
+    <%= current_user.email %>
+    <%= link_to "Sign out", destroy_user_session_path,  data: {turbo_method: :delete} %>
+<% else %>
+    <%= link_to "Sign In", new_user_session_path %>
+    <%= link_to "Sign Up", new_user_registration_path %>
+<% end %>
+
 <h1>Rails Twitter</h1>
