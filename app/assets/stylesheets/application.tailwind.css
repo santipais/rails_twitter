@@ -54,7 +54,7 @@
   }
 
   .heading-2{
-    @apply text-2xl font-semibold text-dark-900;
+    @apply text-2xl font-extrabold text-dark-900;
   }
 
   .heading-3{
