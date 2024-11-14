@@ -50,7 +50,7 @@
   }
 
   .alert {
-   @apply bg-red-300 rounded-md text-red-800 px-4 py-2; 
+   @apply bg-red-300 rounded-md text-red-800 px-4 py-2 text-center; 
   }
 
   .heading-2{
