@@ -112,7 +112,4 @@
   .signup .submit {
       @apply w-[70px] h-[19px] left-[206px] top-[15px] absolute text-center text-white text-base font-extrabold font-['Inter'];
   }
-  .alert {
-    @apply text-red text-[13px] font-medium leading-[normal];
-  }
 }

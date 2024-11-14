@@ -1,9 +1,7 @@
-<% if resource.errors.any? %>
-  <div id="error_explanation" data-turbo-cache="false">
+<% if resource.errors[field].any? %>
+  <div class="text-[#E34141] text-[12px] font-medium leading-[normal] pl-1" id="error_explanation" data-turbo-cache="false">
     <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+       <%=field%> <%=resource.errors[field].to_sentence %>
     </ul>
   </div>
 <% end %>
