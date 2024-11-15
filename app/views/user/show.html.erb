@@ -1,1 +1,119 @@
-HOLA
+<div class="flex flex-row h-screen w-screen pt-10">
+    <!--Side Menu-->
+    <div class="flex w-[275px] h-full flex-col items-start gap-[219px] shrink-0 px-2.5 py-0">
+        <div class="flex flex-col w-full h-auto">
+            <div>
+                <%= image_tag "twitter.png" %>
+            </div>
+            <div class="flex flex-col w-full h-[300px] pt-3 text-[#1da1f2] font-bold text-sm items-center">
+                <div class="w-full h-[60px] py-4">
+                    Home
+                </div>
+                <div class="w-full h-[60px] py-4">
+                    Messages
+                </div>
+                <div class="w-full h-[60px] py-4">
+                    Profile
+                </div>
+                <div class="w-full h-[60px] py-4">
+                    More
+                </div>
+            </div>
+            <%= button_tag "Tweet", class: "w-[228px] h-[39px] bg-[#1da1f2] border border-sky-500 rounded-full text-center text-white font-semibold text-sm"%>
+        </div>
+            <div class="mt-auto">
+                Profile
+            </div>
+    </div>
+
+    <!--Main Content -->
+    <div class="flex-1 h-full flex flex-col items-start px-px py-0">
+        <div class="w-full h-[53px]">
+            <div class="inline-flex h-6 items-center shrink-0 pr-[35px]">
+                <div class="flex w-6 h-6 justify-center items-center pl-[4.001px] pr-[3px] py-[5px]">
+                    <%= image_tag "Group.png", class: "w-[17px] h-3.5 shrink-0" %>
+                </div>
+            </div>
+            <div class="inline-flex flex-col justify-center items-start px-0 py-px">
+                <div class="text-[color:var(--Black,#0F1419)] text-[19px] font-bold leading-[normal]">
+                    Name
+                </div>
+                <div class="text-[color:var(--Dark-5,#5B7083)] text-[13px] font-medium leading-[normal]">
+                    9 tweets
+                </div>
+            </div>
+            <div class="flex flex-col justify-end items-start">
+                <div class="w-full h-px [background:var(--Dark-7,#EBEEF0)]"></div>
+                <div class="flex w-full h-[87px] items-start px-[15px] py-[5px]"></div>
+            </div>
+        </div>
+
+        <!--Profile Section -->
+        <div class="w-full h-[410px] relative">
+           <%= image_tag "cover.png", class: "w-full h-52 object-cover"%>
+            <div class="flex flex-col justify-center relative ml-4">
+                <div class="flex flex-row">
+                    <div class="-mt-16">
+                    <%= image_tag "default.png", class: "rounded-full w-[136.16px] h-[136.16px] absolute border-4 border-[#17202a]"%>
+                    </div>
+                    <div class="ml-auto pt-2 pr-3">
+                        <%= button_tag "Edit Profile", class: "w-[112px] h-[39px] border border-sky-500 rounded-full text-center text-sky-500 font-semibold text-sm"%>
+                    </div>
+                </div>
+                <p class="pt-[30px] pl-2 text-xl font-bold">
+                    Nombre Aca
+                </p>
+                <p class="-mt-1 pl-2 text-sm font-normal text-gray-500">
+                    @<%= @user.username %>
+                </p>
+                <p class="pl-2 pt-2 text-sm font-medium">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.
+                </p>
+                <div class="flex flex-row pl-2 pt-2 text-sm font-medium text-gray-500">
+                    <%= image_tag "calendar.png", class: "size-5"%> 
+                    <p class="pl-1">
+                        <%= @user.created_at.strftime("Joined %B %Y") %>
+                    </p>
+                </div>
+                <div class="flex flex-row pl-2 pt-2">
+                    <p class="text-sm font-bold">
+                        569
+                    </p>
+                    <p class="pl-1 text-sm font-sm text-gray-500">
+                        Following
+                    </p>
+                    <p class="pl-4 text-sm font-bold">
+                        72
+                    </p>
+                    <p class="pl-1 text-sm font-sm text-gray-500">
+                        Followers
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="flex flex-row w-full h-[52px] pl-2 pt-10 text-center font-semibold">
+            <div class="w-full h-[52px] border-b-2 border-[#1da1f2] pb-1 text-[#1da1f2] ">
+                Tweets
+            </div>
+            <div class="w-full h-[52px] text-[#5B7083]">
+                Tweets & replies
+            </div>
+            <div class="w-full h-[52px] text-[#5B7083]">
+                Media
+            </div>
+            <div class="w-full h-[52px] text-[#5B7083]">
+                Likes
+            </div>
+        </div>
+        <!-- Tweet Section-->
+        <div class="flex flex-col w-full h-full pl-2 pt-12">
+            
+        </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="flex w-[350px] h-full flex-col items-start gap-[15px] shrink-0 pt-2.5 pl-1">
+    </div>
+</div>
