@@ -1,31 +1,32 @@
-
-<div class="w-screen h-screen flex">
-  <div class="max-w-[600px] max-h-[650px] shrink-0 [background:#FFF] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.15)] rounded-[29px] w-full h-full m-auto flex flex-wrap">
+<div class="[background:#FFF] mx-auto">
+  <div class="flex flex-col items-center justify-center w-[600px] h-[650px] shrink-0 [background:#FFF] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.15)] rounded-[29px]">
     <!--h3 class="heading-3 m-6">Step 2 of 3</h3> -->
-    <%= form_for(resource, as: resource_name, url: user_registration_path, html: { class: "pt-20 w-full mx-14 flex flex-col gap-y-5" }) do |f| %>
-      <h2 class="heading-2 mb-2.5">Create your account</h2>
-
-      <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: user_registration_path, html: { class: "pt-5 px-1 flex flex-col gap-y-5" }) do |f| %>
+      <h2 class="heading-2 mb-5">Create your account</h2>
 
       <div class="w-full">
         <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "input-field" %>
+        <%= render "devise/shared/error_messages", resource: resource, field: 'email' %>
       </div>
+
 
       <div class="w-full">
         <%= f.text_field :username, autocomplete: "username", placeholder: "Username", class: "input-field" %>
+        <%= render "devise/shared/error_messages", resource: resource, field: 'username' %>
       </div>
-
       <div class="w-full">
         <%= f.password_field :password, autocomplete: "password", placeholder: "Password", class: "input-field" %>
+        <%= render "devise/shared/error_messages", resource: resource, field: 'password' %>
       </div>
 
       <div class="w-full">
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input-field", placeholder: "Password Confirmation" %>
+        <%= render "devise/shared/error_messages", resource: resource, field: 'password_confirmation' %>
       </div>
 
 
-      <%= f.submit "Sign Up", class: "btn btn-dark btn-lg mt-20" %>
+      <%= f.submit "Sign Up", class: "mt-16 btn btn-dark btn-lg" %>
     <% end %>
-    <%= render "devise/shared/links" %>
+    <div> Already have an account? <%= link_to "Log in", new_session_path(resource_name), style: "color: #41A2E3;" %> </div>
   </div>
 </div>

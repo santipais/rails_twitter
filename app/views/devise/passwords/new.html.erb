@@ -5,10 +5,9 @@
       <div class="mb-6" style="color: gray;">Enter the email associated with your account to change your password.</div>
       <%= form_for(resource, as: resource_name, url: user_password_path, html: { class: "pt-20 px-1 flex flex-col gap-y-5", method: :post }) do |f| %>
 
-        <%= render "devise/shared/error_messages", resource: resource %>
-
         <div class="w-full">
           <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "input-field", autofocus: true %>
+          <%= render "devise/shared/error_messages", resource: resource, field: 'email' %>
         </div>
 
         <%= f.submit "Next", class: "btn btn-dark btn-lg mt-20" %>
