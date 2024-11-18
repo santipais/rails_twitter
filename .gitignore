@@ -45,3 +45,4 @@
 *.pem
 tmp/cache/bootsnap/load-path-cache
 *.log
+app/assets/builds/*
