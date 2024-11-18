@@ -26,10 +26,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_18_145238) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "name", null: false
+    t.string "first_name", default: "", null: false
     t.string "bio"
     t.string "website"
-    t.date "birthdate", null: false
+    t.date "birthdate", default: "1980-01-01", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

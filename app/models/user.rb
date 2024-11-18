@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
   validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_sensitive: true }
   validates :encrypted_password, presence: true
-  validates :name, presence: true, length: { minimum: 2 }
+  validates :first_name, presence: true, length: { minimum: 2 }
   validates :bio, length: { maximum: 160 }
   validates :website, format: { with: %r{https?://(www.)?[^\W]*\.com} }, allow_blank: true
   validates :birthdate, comparison: { less_than: 18.years.ago }
