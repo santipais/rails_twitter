@@ -36,7 +36,7 @@
             </div>
             <div class="inline-flex flex-col justify-center items-start px-0 py-px">
                 <div class="text-[color:var(--Black,#0F1419)] text-[19px] font-bold leading-[normal]">
-                    Name
+                    <%= @user.first_name %>
                 </div>
                 <div class="text-[color:var(--Dark-5,#5B7083)] text-[13px] font-medium leading-[normal]">
                     9 tweets
@@ -50,22 +50,28 @@
             <div class="flex flex-col justify-center relative ml-4">
                 <div class="flex flex-row">
                     <div class="-mt-16">
-                    <%= image_tag "default.png", class: "rounded-full w-[136.16px] h-[136.16px] absolute border-4 border-[#17202a]"%>
+                    <%= image_tag "profile.png", class: "rounded-full w-32 h-32 absolute border-4 border-[#17202a]"%>
                     </div>
                     <div class="ml-auto pt-2 pr-3">
                         <%= button_tag "Edit Profile", class: "w-[112px] h-[39px] border border-sky-500 rounded-full text-center text-sky-500 font-semibold text-sm"%>
                     </div>
                 </div>
                 <p class="pt-[30px] pl-2 text-xl font-bold">
-                    Nombre Aca
+                    <%= @user.first_name %>
                 </p>
                 <p class="-mt-1 pl-2 text-sm font-normal text-gray-500">
                     @<%= @user.username %>
                 </p>
                 <p class="pl-2 pt-2.5 text-sm font-medium">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.
+                    <%= @user.bio %>
                 </p>
                 <div class="flex flex-row pl-2 pt-2.5 text-sm font-medium text-gray-500">
+                    <% if @user.website %>
+                        <%= image_tag "website.png", class: "size-5"%> 
+                        <p class="pl-1 pr-2">
+                            <%= @user.website %>
+                        </p>
+                    <%end%>
                     <%= image_tag "calendar.png", class: "size-5"%> 
                     <p class="pl-1">
                         <%= @user.created_at.strftime("Joined %B %Y") %>
