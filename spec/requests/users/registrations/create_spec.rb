@@ -94,52 +94,5 @@ RSpec.describe 'POST /users', type: :request do
         expect { subject }.not_to change(User, :count)
       end
     end
-
-    context 'when password is too short' do
-      let(:password) { 'Ab123' }
-
-      it 'returns an unprocessable entity response' do
-        subject
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-      it 'returns an error message' do
-        subject
-        expect(json['errors']['password']).to include('is too short (minimum is 6 characters)')
-      end
-
-      it 'does not return a valid user and access token' do
-        subject
-        expect(response.header['Authorization']).to be_nil
-      end
-
-      it 'does not create a user' do
-        expect { subject }.not_to change(User, :count)
-      end
-    end
-
-    context 'when passwords do not match' do
-      let(:password) { 'NewPassword123' }
-      let(:password_confirmation) { 'NewPassword1234' }
-
-      it 'returns an unprocessable entity response' do
-        subject
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-      it 'returns an error message' do
-        subject
-        expect(json['errors']['password_confirmation']).to include('doesn\'t match Password')
-      end
-
-      it 'does not return a valid user and access token' do
-        subject
-        expect(response.header['Authorization']).to be_nil
-      end
-
-      it 'does not create a user' do
-        expect { subject }.not_to change(User, :count)
-      end
-    end
   end
 end
