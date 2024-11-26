@@ -9,19 +9,19 @@ RSpec.describe 'POST /users', type: :request do
   let(:password_confirmation) { 'password' }
   let(:username) { 'jhon' }
   let(:first_name) { 'Jhon' }
+  let(:last_name) { 'Doe' }
   let(:birthdate) { '01/01/1999' }
+  let(:json) { response.parsed_body }
 
   let(:params) do
     {
-      user: { email:, password:, password_confirmation:, username:, birthdate:, first_name: }
+      user: { email:, password:, password_confirmation:, username:, birthdate:, first_name:, last_name: }
     }
   end
 
   subject { post user_registration_path, params:, as: :json }
 
   context 'when the params are correct' do
-    let(:json) { response.parsed_body }
-
     it 'returns a successful response' do
       subject
       expect(response).to have_http_status(:success)
@@ -35,6 +35,7 @@ RSpec.describe 'POST /users', type: :request do
       expect(json['username']).to eq(username)
       expect(json['birthdate'].to_date).to eq(birthdate.to_date)
       expect(json['first_name']).to eq(first_name)
+      expect(json['last_name']).to eq(last_name)
     end
 
     it 'creates a user' do
@@ -48,7 +49,6 @@ RSpec.describe 'POST /users', type: :request do
   end
 
   context 'when the params are incorrect' do
-    let(:json) { response.parsed_body }
     context 'when email is missing' do
       let(:email) { nil }
 
@@ -73,7 +73,7 @@ RSpec.describe 'POST /users', type: :request do
     end
 
     context 'when email is already taken' do
-      before { create(:user, email: 'jhondoe@gmail.com') }
+      before { create(:user, email:) }
 
       it 'returns an unprocessable entity response' do
         subject

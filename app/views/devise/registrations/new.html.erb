@@ -1,6 +1,5 @@
 <div class="[background:#FFF] mx-auto my-32">
   <div class="flex flex-col items-center justify-center w-[600px] h-[650px] shrink-0 [background:#FFF] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.15)] rounded-[29px]">
-    <!--h3 class="heading-3 m-6">Step 2 of 3</h3> -->
     <%= form_for(resource, as: resource_name, url: user_registration_path, html: { class: "pt-5 px-1 flex flex-col gap-y-5" }) do |f| %>
       <h2 class="heading-2 mb-5">Create your account</h2>
 
@@ -15,8 +14,13 @@
       </div>
 
       <div class="w-full">
-        <%= f.text_field :first_name, autocomplete: "first_name", placeholder: "Name", class: "input-field" %>
+        <%= f.text_field :first_name, autocomplete: "first_name", placeholder: "First name", class: "input-field" %>
         <%= render "devise/shared/error_messages", resource: resource, field: 'first_name' %>
+      </div>
+
+      <div class="w-full">
+        <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Last name", class: "input-field" %>
+        <%= render "devise/shared/error_messages", resource: resource, field: 'last_name' %>
       </div>
 
       <div class="w-full">

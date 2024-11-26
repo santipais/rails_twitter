@@ -26,7 +26,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_18_145238) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "first_name", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.string "bio"
     t.string "website"
     t.date "birthdate", default: "1980-01-01", null: false

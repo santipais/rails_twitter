@@ -36,7 +36,7 @@
             </div>
             <div class="inline-flex flex-col justify-center items-start px-0 py-px">
                 <div class="text-[color:var(--Black,#0F1419)] text-[19px] font-bold leading-[normal]">
-                    <%= @user.first_name %>
+                    <%= @user.full_name %>
                 </div>
                 <div class="text-[color:var(--Dark-5,#5B7083)] text-[13px] font-medium leading-[normal]">
                     9 tweets
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <p class="pt-[30px] pl-2 text-xl font-bold">
-                    <%= @user.first_name %>
+                    <%= @user.full_name %>
                 </p>
                 <p class="-mt-1 pl-2 text-sm font-normal text-gray-500">
                     @<%= @user.username %>
