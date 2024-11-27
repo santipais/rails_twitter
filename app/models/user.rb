@@ -29,10 +29,6 @@ class User < ApplicationRecord
     encrypted_password.blank?
   end
 
-  def only_if_unconfirmed(&)
-    pending_any_confirmation(&)
-  end
-
   # Overrides devise password_required? to be required only if it is being set, but not for new records
   def password_required?
     return false unless persisted?

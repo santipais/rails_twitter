@@ -42,7 +42,7 @@ module Users
       @confirmable = User.find_or_initialize_with_error_by(:confirmation_token, params[:confirmation_token])
       return if @confirmable.new_record?
 
-      @confirmable.only_if_unconfirmed(&)
+      @confirmable.send(:pending_any_confirmation, &)
     end
 
     def do_show
