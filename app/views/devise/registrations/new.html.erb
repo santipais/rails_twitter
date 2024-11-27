@@ -28,17 +28,6 @@
         <%= render "devise/shared/error_messages", resource: resource, field: 'birthdate' %>
       </div>
 
-      <div class="w-full">
-        <%= f.password_field :password, autocomplete: "password", placeholder: "Password", class: "input-field" %>
-        <%= render "devise/shared/error_messages", resource: resource, field: 'password' %>
-      </div>
-
-      <div class="w-full">
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input-field", placeholder: "Password Confirmation" %>
-        <%= render "devise/shared/error_messages", resource: resource, field: 'password_confirmation' %>
-      </div>
-
-
       <%= f.submit "Sign Up", class: "mt-16 btn btn-dark btn-lg" %>
     <% end %>
     <div> Already have an account? <%= link_to "Log in", new_session_path(resource_name), style: "color: #41A2E3;" %> </div>

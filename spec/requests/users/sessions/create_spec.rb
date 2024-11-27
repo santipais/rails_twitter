@@ -38,4 +38,23 @@ RSpec.describe 'POST /users/sign_in', type: :request do
       expect(controller.current_user.id).to eq(user.id)
     end
   end
+
+  context 'when the params are incorrect' do
+    let(:json) { response.parsed_body }
+    let(:password) { 'invalid' }
+
+    it 'returns an unauthorized response' do
+      subject
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it 'returns error' do
+      subject
+      expect(response.body).to include('Invalid Email or password.')
+    end
+
+    it 'does not creates a user' do
+      expect { subject }.to_not change(User, :count)
+    end
+  end
 end

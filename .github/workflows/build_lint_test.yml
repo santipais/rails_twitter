@@ -103,6 +103,9 @@ jobs:
 
       - name: load schema
         run: bundle exec rails db:schema:load
+      
+      - name: assets precompile
+        run: bin/rails assets:clean assets:precompile
 
       - name: Run tests
         run: bundle exec rspec

@@ -1,0 +1,20 @@
+<div class="[background:#FFF] mx-auto my-32">
+  <div class="flex flex-col items-center justify-center w-[600px] h-[650px] shrink-0 [background:#FFF] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.15)] rounded-[29px]">
+    <%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {class: "flex flex-col gap-y-5", :method => 'patch'} do |f| %>
+    <h2 class="heading-2 mb-5">Account Activation<% if resource.try(:username) %> for <%= resource.username %><% end %></h2>
+      <% if @requires_password %>
+          <div class="w-full">
+            <%= f.password_field :password, autocomplete: "password", placeholder: "Password", class: "input-field" %>
+            <%= render "devise/shared/error_messages", resource: resource, field: 'password' %>
+          </div>
+
+          <div class="w-full">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input-field", placeholder: "Password Confirmation" %>
+            <%= render "devise/shared/error_messages", resource: resource, field: 'password_confirmation' %>
+          </div>
+      <% end %>
+      <%= hidden_field_tag :confirmation_token,@confirmation_token %>
+      <%= f.submit "Activate",  class: "mt-16 btn btn-dark btn-lg" %>
+    <% end %>
+  </div>
+</div>
