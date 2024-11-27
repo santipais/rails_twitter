@@ -2,16 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="profile-menu"
 export default class extends Controller {
-  static targets = ["menu"]; // Define targets (dropdown menu)
+  static targets = ["menu"];
 
   connect() {
-    // Menu should be hidden initially
+    // Menu hidden initially
     this.menuTarget.classList.add("hidden");
   }
 
   toggleMenu(event) {
     event.stopPropagation(); // Prevent closing immediately when clicking on the div
-    this.menuTarget.classList.toggle("hidden"); // Toggle visibility
+    this.menuTarget.classList.toggle("hidden");
   }
 
   closeMenu(event) {
