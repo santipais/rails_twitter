@@ -10,8 +10,6 @@ FactoryBot.define do
 
     trait :confirmed do
       confirmed_at { Time.current }
-    end
-    trait :password do
       password { Faker::Internet.password(min_length: 6, max_length: 8) }
       password_confirmation { password }
     end

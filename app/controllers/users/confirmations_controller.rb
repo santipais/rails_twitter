@@ -19,7 +19,7 @@ module Users
     def update
       with_unconfirmed_confirmable do
         if @confirmable.no_password?
-          @confirmable.attempt_set_password(password_params)
+          @confirmable.update(password_params)
           return do_confirm if @confirmable.valid? && @confirmable.password_match?
 
           return do_show

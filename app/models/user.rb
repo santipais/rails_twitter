@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
   validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_insensitive: true }
-  validates :encrypted_password, presence: true, if: :password_required?
+  validates :encrypted_password, presence: true, if: :confirmed? || :password_required?
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }
   validates :bio, length: { maximum: 160 }
   validates :website, format: { with: %r{https?://(www.)?[^\W]*\.com} }, allow_blank: true
@@ -25,25 +25,15 @@ class User < ApplicationRecord
     password == password_confirmation
   end
 
-  # new function to set the password without knowing the current
-  # password used in our confirmation controller.
-  def attempt_set_password(params)
-    p = {}
-    p[:password] = params[:password]
-    p[:password_confirmation] = params[:password_confirmation]
-    update(p)
-  end
-
-  # new function to return whether a password has been set
   def no_password?
     encrypted_password.blank?
   end
 
   def only_if_unconfirmed(&)
-    pending_any_confirmation(&) # Checks whether the record requires any confirmation.
+    pending_any_confirmation(&)
   end
 
-  # Overrides devise password_required to be required only if it is being set, but not for new records
+  # Overrides devise password_required? to be required only if it is being set, but not for new records
   def password_required?
     return false unless persisted?
 
