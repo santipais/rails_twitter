@@ -49,6 +49,7 @@ module Users
       @confirmation_token = params[:confirmation_token]
       @requires_password = true
       self.resource = @confirmable
+      clean_up_passwords @confirmable
       set_minimum_password_length
       if @confirmable.errors.any?
         render 'devise/confirmations/show', status: :unprocessable_entity, formats: [:html]

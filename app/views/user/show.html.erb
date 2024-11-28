@@ -67,7 +67,7 @@
                     <%= image_tag "profile.png", class: "rounded-full w-32 h-32 absolute border-4 border-[#17202a]"%>
                     </div>
                     <div class="ml-auto pt-2 pr-3">
-                        <%= button_tag "Edit Profile", class: "w-[112px] h-[39px] border border-sky-500 rounded-full text-center text-sky-500 font-semibold text-sm"%>
+                        <%= button_to "Edit Profile", edit_user_path, method: :get, class: "w-[112px] h-[39px] border border-sky-500 rounded-full text-center text-sky-500 font-semibold text-sm"%>
                     </div>
                 </div>
                 <p class="pt-[30px] pl-2 text-xl font-bold">
