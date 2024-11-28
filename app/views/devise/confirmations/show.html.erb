@@ -6,6 +6,9 @@
           <div class="w-full">
             <%= f.password_field :password, autocomplete: "password", placeholder: "Password", class: "input-field" %>
             <%= render "devise/shared/error_messages", resource: resource, field: 'password' %>
+            <% if @minimum_password_length %>
+              <div class="px-1" style="color: gray;font-size: 13px;">Passwords must contain at least <%= @minimum_password_length %> characters minimum.</div>
+            <% end %>
           </div>
 
           <div class="w-full">
