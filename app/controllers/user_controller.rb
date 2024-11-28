@@ -16,7 +16,16 @@ class UserController < ApplicationController
     if @user.update(user_params)
       redirect_to @user
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.turbo_stream do
+          render(turbo_stream: turbo_stream.replace(
+            'user_form',
+            partial: 'form',
+            locals: { user: @user }
+          ))
+        end
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 

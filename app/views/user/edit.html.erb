@@ -1,49 +1,7 @@
-<div class="[background:#FFF] mx-auto my-10">
-  <div class="flex flex-col w-[598px] h-[888px] shrink-0 [background:#FFF] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.15)] rounded-[29px]">
-    <%= form_with(model: @user, url: user_path, html: { class: "pt-5 flex flex-col", method: :patch }) do |f| %>
-
-      <div class="flex flex-row w-full h-12 pl-6">
-        <%= link_to (image_tag "cross.png", class: "w-5 h-5 mt-1"), :back %>
-        <div class="font-semibold text-xl pl-10">Edit profile</div>
-        <%= f.submit "Save", class: "btn btn-dark btn-sm py-0 ml-auto mr-6" %>
-      </div>
-      <div class="w-full border">
-        <%= image_tag "cover.png", class: "w-full h-52 object-cover"%>
-        <div class="flex flex-col justify-center relative ml-4">
-            <div class="flex flex-row">
-                <div class="-mt-16">
-                <%= image_tag "profile.png", class: "rounded-full w-32 h-32 absolute border-4 border-[#17202a]"%>
-                </div>
-            </div>
+<%= turbo_frame_tag "edit_modal" do %>
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div class="flex flex-col w-[598px] h-[888px] shrink-0 [background:#FFF] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.15)] rounded-[29px]">
+            <%= render "form", user: @user %>
         </div>
-      </div>
-      <div class="flex flex-col items-center gap-y-5 mt-24">
-        <div>
-            <%= f.text_field :first_name, autocomplete: "first_name", placeholder: "First name", class: "input-field" %>
-            <%= render "devise/shared/error_messages", resource: @user, field: 'first_name' %>
-        </div>
-
-        <div>
-            <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Last name", class: "input-field" %>
-            <%= render "devise/shared/error_messages", resource: @user, field: 'last_name' %>
-        </div>
-
-        <div>
-            <%= f.text_area :bio, autocomplete: "bio", placeholder: "Bio", class: "input-area", maxlength: 140, rows: 3, cols:49, style: "resize: none;" %>
-            <%= render "devise/shared/error_messages", resource: @user, field: 'bio' %>
-        </div>
-
-        <div>
-            <%= f.text_field :website, autocomplete: "website", placeholder: "Website", class: "input-field" %>
-            <%= render "devise/shared/error_messages", resource: @user, field: 'website' %>
-        </div>
-
-            <%= f.label :date_of_birth, class: "mr-auto ml-[60px] font-semibold text-md" %>
-        <div>
-            <%= f.date_select :birthdate,{ autocomplete: "birthdate", placeholder: "BirthDate", start_year: 1900, end_year: Time.now.year, order: [:day, :month, :year]}, {class: "date-select mx-[14px]"} %>
-            <%= render "devise/shared/error_messages", resource: @user, field: 'birthdate' %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+    </div>
+<% end %>
