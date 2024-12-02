@@ -45,6 +45,10 @@
     @apply border border-dark-300;
   }
 
+  .date-select {
+    @apply w-[139px] h-[63px] bg-[#d9d9d9]/0 rounded-[3px] border border-[#d9d9d9]
+  }
+
   .field_with_errors {
     @apply [&>*]:!border-rose-500 [&>*]:!border-2;
   }
@@ -107,6 +111,10 @@
 
   .input-field {
     @apply w-[483px] h-[63px] shrink-0 border [background:rgba(217,217,217,0.00)] rounded-[3px] border-solid border-[#D9D9D9];
+  }
+
+  .input-area {
+    @apply w-[483px] border [background:rgba(217,217,217,0.00)] rounded-[3px] border-solid border-[#D9D9D9]
   }
 
   .signup .submit {
