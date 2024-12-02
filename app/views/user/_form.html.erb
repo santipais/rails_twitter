@@ -1,6 +1,6 @@
 <%= form_with(model: user, url: user_path, html: { class: "pt-5 flex flex-col", method: :patch }, data: {turbo_frame: "_top"}, id: "user_form" )do |f| %>
     <div class="flex flex-row w-full h-12 pl-6">
-        <%= link_to (image_tag "cross.png", class: "w-5 h-5 mt-1"), :back %>
+        <%= link_to (image_tag "cross.png", class: "w-5 h-5 mt-1"), :back, data: {turbo_frame: "_top"} %>
         <div class="font-semibold text-xl pl-10">Edit profile</div>
         <%= f.submit "Save", class: "btn btn-dark btn-sm py-0 ml-auto mr-6" %>
     </div>
@@ -37,8 +37,10 @@
 
             <%= f.label :date_of_birth, class: "mr-auto ml-[60px] font-semibold text-md" %>
         <div>
-            <%= f.date_select :birthdate,{ autocomplete: "birthdate", placeholder: "BirthDate", start_year: 1900, end_year: Time.now.year, order: [:day, :month, :year]}, {class: "date-select mx-[14px]"} %>
-            <%= render "devise/shared/error_messages", resource: user, field: 'birthdate' %>
+            <%= f.date_select :birthdate,{ autocomplete: "birthdate", placeholder: "BirthDate", start_year: 1900, end_year: Time.current.year, order: [:day, :month, :year]}, {class: "date-select mx-[14px]"} %>
+            <div class="pl-3">
+                <%= render "devise/shared/error_messages", resource: user, field: 'birthdate' %>
+            </div>
         </div>
     </div>
 <% end %>

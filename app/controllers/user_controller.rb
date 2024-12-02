@@ -2,19 +2,15 @@
 
 class UserController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user
 
-  def show
-    @user = current_user
-  end
+  def show; end
 
-  def edit
-    @user = current_user
-  end
+  def edit; end
 
   def update
-    @user = current_user
     if @user.update(user_params)
-      redirect_to @user
+      redirect_to user_path
     else
       respond_to do |format|
         format.turbo_stream do
@@ -30,6 +26,10 @@ class UserController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = current_user
+  end
 
   def user_params
     params.require(:user)
