@@ -31,7 +31,7 @@ RSpec.describe 'PATCH /user/confirmation', type: :request do
 
     it 'user is confirmed' do
       subject
-      expect(user.confirmed_at).not_to eq(nil)
+      expect(user.confirmed_at).to be_present
     end
   end
 
