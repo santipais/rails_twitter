@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'POST /users/sign_in', type: :request do
-  let!(:user) { create(:user, :confirmed) }
+  let!(:user) { create(:user) }
   let(:email) { user.email }
   let(:password) { user.password }
 

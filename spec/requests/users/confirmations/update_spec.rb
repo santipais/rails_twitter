@@ -3,11 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'PATCH /user/confirmation', type: :request do
-  before { @user = create(:user) }
-  let(:confirmation_token) { @user.confirmation_token }
+  let!(:user) { create(:user, :unconfirmed) }
+  let(:confirmation_token) { user.confirmation_token }
   let(:password) { 'secret' }
   let(:password_confirmation) { 'secret' }
-  let(:user) { User.find_by(confirmation_token: confirmation_token) }
 
   let(:params) do
     {
@@ -18,8 +17,6 @@ RSpec.describe 'PATCH /user/confirmation', type: :request do
   subject { patch update_user_confirmation_path, params:, as: :json }
 
   context 'when the params are correct' do
-    let(:json) { response.parsed_body }
-
     it 'returns a successful response' do
       subject
       expect(response).to have_http_status(:found)
@@ -31,6 +28,7 @@ RSpec.describe 'PATCH /user/confirmation', type: :request do
 
     it 'user is confirmed' do
       subject
+      user.reload
       expect(user.confirmed_at).to be_present
     end
   end
