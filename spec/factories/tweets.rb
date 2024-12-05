@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :tweet do
-    content { Faker::String.random(length: 1..280) }
+    content { Faker::Lorem.characters(number: 1..280) }
     user { build(:user) }
   end
 end
