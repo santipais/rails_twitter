@@ -28,8 +28,7 @@ RSpec.describe 'PATCH /user/confirmation', type: :request do
 
     it 'user is confirmed' do
       subject
-      user.reload
-      expect(user.confirmed_at).to be_present
+      expect(user.reload.confirmed_at).to be_present
     end
   end
 
