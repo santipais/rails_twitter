@@ -19,7 +19,9 @@
                     More
                 </div>
             </div>
-            <%= button_tag "Tweet", class: "w-[228px] h-[39px] bg-[#1da1f2] border border-sky-500 rounded-full text-center text-white font-semibold text-sm"%>
+            <%= link_to new_tweet_path do %>
+                <%= button_tag "Tweet", class: "w-[228px] h-[39px] bg-[#1da1f2] border border-sky-500 rounded-full text-center text-white font-semibold text-sm"%>
+            <%end%>
         </div>
         <div data-controller="profile-menu" class="flex flex-col mt-auto mb-2">
             <div data-profile-menu-target="menu" class="mb-4 bg-white rounded-md border-spacing-6 shadow-2xl hidden">
