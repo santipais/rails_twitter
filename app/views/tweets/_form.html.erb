@@ -1,0 +1,5 @@
+<%= form_with(model: model, url: tweets_path, html: { class: "pt-5 flex flex-col"}, id: "tweet_form" )do |f| %>
+    <%= f.text_area :content, autocomplete: "content", placeholder: "What's happening?", class: "border focus:outline-none focus:ring-0 focus:border-none placeholder:text-lg", maxlength: 280, rows: 4, cols:49, style: "resize: none;" %>            
+    <%= render "devise/shared/error_messages", resource: @tweet, field: 'content' %>
+    <%= f.submit "Tweet", class: "w-20 h-10 btn btn-primary btn-sm py-0 ml-auto" %>
+<% end %>

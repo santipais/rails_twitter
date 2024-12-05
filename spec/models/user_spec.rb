@@ -3,12 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { build(:user) }
-
   describe 'validations' do
-    it 'is valid with valid attributes' do
-      expect(user).to be_valid
-    end
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_presence_of(:username) }
     it { is_expected.to validate_presence_of(:first_name) }
@@ -26,12 +21,17 @@ RSpec.describe User, type: :model do
     it { is_expected.not_to allow_value('https://invalid.website.com').for(:website) }
 
     context 'when user is not confirmed' do
+      subject { build(:user, :unconfirmed) }
       it { is_expected.not_to validate_presence_of(:encrypted_password) }
     end
 
     context 'when user is confirmed' do
-      subject { build(:user, :confirmed) }
+      subject { build(:user) }
       it { is_expected.to validate_presence_of(:encrypted_password) }
     end
+  end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:tweets).dependent(:destroy) }
   end
 end

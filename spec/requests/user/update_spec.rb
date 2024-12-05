@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'PUT /user', type: :request do
-  let!(:user) { create(:user, :confirmed) }
+  let!(:user) { create(:user) }
   let(:bio) { 'New Bio' }
   let(:first_name) { 'New' }
   let(:last_name) { 'Name' }
