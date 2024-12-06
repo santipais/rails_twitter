@@ -20,7 +20,7 @@ RSpec.describe 'POST /tweets', type: :request do
     it 'redirects to the user show page' do
       subject
       expect(response).to have_http_status(:found)
-      expect(response).to redirect_to(user_path)
+      expect(response).to redirect_to(root_path)
     end
 
     it 'creates the tweet' do
