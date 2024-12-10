@@ -1,12 +1,12 @@
 <div class="w-[600px] h-auto py-4 border">
     <div class="flex flex-row mx-4">
         <div class="pr-3 shrink-0">
-            <%= link_to (image_tag "profile.png", class: "w-12 h-12 mt-1 rounded-full"), user_path, data: {turbo_frame: "_top"}  %>
+            <%= link_to (image_tag "profile.png", class: "w-12 h-12 mt-1 rounded-full"), user_path(new_tweet.user), data: {turbo_frame: "_top"}  %>
         </div>
         <div class="w-full">
-            <%= form_with(model: model, url: tweets_path, html: { class: "flex flex-col"}, id: "tweet_form" )do |f| %>
+            <%= form_with(model: new_tweet, url: tweets_path, html: { class: "flex flex-col"}, id: "tweet_form" ) do |f| %>
                 <%= f.text_area :content, autocomplete: "content", placeholder: "What's happening?", class: "border-none focus:outline-none focus:ring-0 focus:border-none placeholder:text-lg", maxlength: 280, rows: 5, cols:49, style: "resize: none;" %>            
-                <%= render "devise/shared/error_messages", resource: model, field: 'content' %>
+                <%= render "devise/shared/error_messages", resource: new_tweet, field: 'content' %>
                 <%= f.submit "Tweet", class: "w-20 h-10 btn btn-primary btn-sm py-0 ml-auto" %>
             <% end %>
         </div>

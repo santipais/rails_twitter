@@ -17,7 +17,7 @@ RSpec.describe 'PUT /user', type: :request do
     }
   end
 
-  subject { patch user_path, params: }
+  subject { patch update_user_path, params: }
 
   context 'when the params are correct' do
     it 'returns a successful response' do
