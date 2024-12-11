@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "#{dom_id(@user)}_tweets" do%>
+    <% @tweets.each do |tweet|%>
+        <%= render "tweets/tweet", tweet: tweet %>
+    <%end%>
+<%end%>

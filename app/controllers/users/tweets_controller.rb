@@ -5,7 +5,9 @@ module Users
     before_action :set_user
 
     def index
-      @tweets = Tweet.where(user: @user).order(created_at: :desc).includes(:user)
+      @tweets = @user.tweets.order(created_at: :desc)
+
+      render partial: 'tweets', locals: { user: @user, tweets: @tweets }
     end
 
     private
