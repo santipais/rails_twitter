@@ -1,4 +1,4 @@
-<%= form_with(model: user, url: user_path, html: { class: "pt-5 flex flex-col", method: :patch }, data: {turbo_frame: "_top"}, id: "user_form" )do |f| %>
+<%= form_with(model: user, url: update_user_path, html: { class: "pt-5 flex flex-col", method: :patch }, data: {turbo_frame: "_top"}, id: "user_form" )do |f| %>
     <div class="flex flex-row w-full h-12 pl-6">
         <%= link_to (image_tag "cross.png", class: "w-5 h-5 mt-1"), :back, data: {turbo_frame: "_top"} %>
         <div class="font-semibold text-xl pl-10">Edit profile</div>

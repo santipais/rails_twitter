@@ -1,0 +1,54 @@
+<div class="flex w-[275px] h-screen flex-col shrink-0 pt-3">
+    <div class="flex flex-col w-full h-auto">
+        <div>
+            <%= link_to (image_tag "twitter.png"), root_path %>
+        </div>
+        <div class="flex flex-col w-full h-[300px] pt-3 font-bold text-sm items-center">
+            <div class="w-full h-[60px] py-4 text-[#1da1f2]">
+                Home
+            </div>
+            <div class="w-full h-[60px] py-4">
+                Messages
+            </div>
+            <div class="w-full h-[60px] py-4">
+                Profile
+            </div>
+            <div class="w-full h-[60px] py-4">
+                More
+            </div>
+        </div>
+        <% if current_user.present? %>
+            <%= link_to new_tweet_path do %>
+                <%= button_tag "Tweet", class: "w-[228px] h-[39px] bg-[#1da1f2] border border-sky-500 rounded-full text-center text-white font-semibold text-sm"%>
+            <%end%>
+        <%end%>
+    </div>
+    <% if current_user.present? %>
+        <div data-controller="profile-menu" class="flex flex-col mt-auto">
+            <div data-profile-menu-target="menu" class="mb-4 bg-white rounded-md border-spacing-6 shadow-2xl hidden">
+                <%= link_to "Sign Out", destroy_user_session_path, data: {turbo_method: :delete}, class:  "block px-4 py-2 font-bold hover:bg-gray-100" %>
+            </div>
+            <div  data-action="click@window->profile-menu#closeMenu click->profile-menu#toggleMenu" class="w-64 h-16 flex flex-row items-center cursor-pointer hover:bg-gray-100 rounded-full">
+                <%= image_tag "profile.png", class: "w-10 h-10 mx-2 rounded-full"%>
+                <div class="flex flex-col pl-3">
+                    <div class="font-bold text-base leading-tight">
+                        <%= current_user.full_name %>
+                    </div>
+                    <div class="text-[#5b7083] text-base font-medium leading-tight">
+                        @<%= current_user.username %>
+                    </div>
+                </div>
+                <%= image_tag "three_dots.png", class: "ml-auto mr-1"%>
+            </div>
+        </div>
+    <%else%>
+        <div class="flex flex-col mt-auto gap-y-2 pb-2">
+            <%= link_to new_user_registration_path do %>
+                <%= button_tag "Sign Up", class: "w-[228px] h-[39px] bg-[#1da1f2] border border-sky-500 rounded-full text-center text-white font-semibold text-sm"%>
+            <%end%>
+            <%= link_to new_user_session_path do %>
+                <%= button_tag "Sign In", class: "w-[228px] h-[39px] bg-[#1da1f2] border border-sky-500 rounded-full text-center text-white font-semibold text-sm"%>
+            <%end%>
+        </div>
+    <%end%>
+</div>
