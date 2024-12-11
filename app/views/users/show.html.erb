@@ -1,6 +1,6 @@
 <%=render "layouts/side_menu"%>
 <!--Main Content -->
-<div class="w-[600px] h-full flex flex-col items-start px-px py-3">
+<div class="w-[600px] h-screen flex flex-col items-start px-px py-3 overflow-y-scroll">
     <div class="w-full h-[53px] border-x">
         <div class="inline-flex h-6 items-center shrink-0 pr-[35px]">
             <div class="flex w-6 h-6 justify-center items-center pl-[4.001px] pr-[3px] py-[5px]">
@@ -85,9 +85,9 @@
     </div>
 
     <!-- Tweet Section-->
-    <div class="flex flex-col w-full h-full pl-2 pt-12">
-        
-    </div>
+    <% @user.tweets.each do |tweet|%>
+        <%= render "tweets/tweet", tweet: tweet %>
+    <%end%>
 </div>
 
 <!-- Right Sidebar -->

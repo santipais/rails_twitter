@@ -1,9 +1,9 @@
 <div class="w-[600px] h-auto border">
-    <div class="flex flex-row my-3 mx-4">
+    <div class="w-full flex flex-row my-3 mx-4">
         <div class="pr-3 shrink-0">
             <%= link_to (image_tag "profile.png", class: "w-12 h-12 rounded-full"), user_path(tweet.user) %>
         </div>
-        <div class="w-full flex flex-col">
+        <div class="w-[500px] flex flex-col">
             <div class="flex flex-row items-center">
                 <div class="font-semibold text-base pr-1">
                     <%= tweet.user.full_name %>
@@ -15,7 +15,7 @@
                 · <%= posted_ago(tweet) %>
                 </div>
             </div>
-            <div>
+            <div class="break-words">
                 <%= tweet.content %>
             </div>
             <div class="flex flex-row items-center pt-10">
