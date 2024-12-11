@@ -1,6 +1,6 @@
 <%=render "layouts/side_menu"%>
 <!--Main Content -->
-<div class="w-[600px] h-full flex flex-col items-start px-px py-3">
+<div class="w-[600px] h-screen flex flex-col items-start px-px py-3 overflow-y-scroll">
     <div class="w-full h-[53px] border-x">
         <div class="inline-flex h-6 items-center shrink-0 pr-[35px]">
             <div class="flex w-6 h-6 justify-center items-center pl-[4.001px] pr-[3px] py-[5px]">
@@ -18,7 +18,7 @@
     </div>
 
     <!--Profile Section -->
-    <div class="w-full relative border">
+    <div class="w-full border">
     <%= image_tag "cover.png", class: "w-full h-52 object-cover"%>
         <div class="flex flex-col justify-center relative ml-4">
             <div class="flex flex-row">
@@ -85,9 +85,9 @@
     </div>
 
     <!-- Tweet Section-->
-    <div class="flex flex-col w-full h-full pl-2 pt-12">
-        
-    </div>
+    <%= turbo_frame_tag "#{dom_id(@user)}_tweets", src: user_tweets_path(@user), class: "w-full" do%>
+        <div>Loading...</div>
+    <%end%>
 </div>
 
 <!-- Right Sidebar -->

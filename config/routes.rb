@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
 
-  resources :users, only: :show
+  resources :users, only: :show do
+    resources :tweets, only: :index, controller: 'users/tweets'
+  end
   resource :user, only: %i[edit update], controller: :user, as: :update_user
   resources :tweets
 end

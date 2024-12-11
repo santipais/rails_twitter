@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
-  validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_insensitive: true }
+  validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_sensitive: false }
   validates :encrypted_password, presence: true, if: :confirmed? || :password_required?
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }
   validates :bio, length: { maximum: 160 }
@@ -36,6 +36,10 @@ class User < ApplicationRecord
     return false unless persisted?
 
     password.present? || password_confirmation.present?
+  end
+
+  def to_param
+    username
   end
 
   private
