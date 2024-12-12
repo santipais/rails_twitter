@@ -11,7 +11,7 @@ RSpec.describe Tweet, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:user).counter_cache(true) }
     it { is_expected.to have_many(:likes).dependent(:destroy) }
     it { is_expected.to have_many(:likers).through(:likes).source(:user) }
   end
