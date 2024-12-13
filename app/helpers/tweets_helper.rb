@@ -15,4 +15,12 @@ module TweetsHelper
       "#{(elapsed_time / 86_400).to_i}d"
     end
   end
+
+  def current_user_liked_tweet?(tweet)
+    tweet.likers.include?(current_user)
+  end
+
+  def current_user_like(tweet)
+    tweet.likes.find { |like| like.user_id == current_user.id }
+  end
 end

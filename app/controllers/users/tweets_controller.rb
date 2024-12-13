@@ -5,9 +5,8 @@ module Users
     before_action :set_user
 
     def index
-      @tweets = @user.tweets.order(created_at: :desc)
-
-      render partial: 'tweets', locals: { user: @user, tweets: @tweets }
+      @tweets = @user.tweets.includes(:likers).order(created_at: :desc)
+      render partial: 'tweets', locals: { tweets: @tweets }
     end
 
     private
