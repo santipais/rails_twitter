@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Tweet < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
 
