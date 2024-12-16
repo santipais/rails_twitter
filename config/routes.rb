@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     resources :tweets, only: :index, controller: 'users/tweets'
   end
   resource :user, only: %i[edit update], controller: :user, as: :update_user
-  resources :tweets
+  resources :tweets do
+    resources :likes, only: %i[create destroy]
+  end
 end

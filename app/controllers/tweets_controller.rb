@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @tweets = Tweet.includes(:user).order(created_at: :desc)
+    @tweets = Tweet.includes(:user, :likes, :likers).order(created_at: :desc)
 
     return if current_user.blank?
 
