@@ -14,42 +14,39 @@ RSpec.describe 'DELETE tweets/:tweet_id/likes/:id', type: :request do
   context 'when user is authenticated' do
     before { sign_in user }
 
-    context 'when the params are correct' do
-      it 'returns a successful response' do
-        subject
-        expect(response).to have_http_status(:successful)
+    it 'returns a successful response' do
+      subject
+      expect(response).to have_http_status(:successful)
+    end
+
+    it 'deletes the like' do
+      expect { subject }.to change(Like, :count).from(1).to(0)
+    end
+
+    context 'when the like_id is invalid' do
+      context 'when the like does not exist' do
+        let(:like_id) { 'invalid_id' }
+
+        it 'returns a not found response' do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+        end
       end
 
-      it 'deletes the like' do
-        expect { subject }.to change(Like, :count).from(1).to(0)
+      context 'when the like does not belong to the user' do
+        let!(:like) { create(:like, tweet: tweet) }
+
+        it 'returns a not found response' do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+        end
       end
     end
 
-    context 'when the params are incorrect' do
-      context 'when the like is incorrect' do
-        context 'when the like does not exist' do
-          let(:like_id) { 'invalid_id' }
+    context 'when the tweet is invalid' do
+      context 'when the tweet does not exist' do
+        let(:tweet_id) { 'invalid_id' }
 
-          it 'returns a not found response' do
-            expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
-          end
-        end
-
-        context 'when the like does not belong to the user' do
-          let!(:like) { create(:like, tweet: tweet) }
-
-          it 'returns a not found response' do
-            expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
-          end
-        end
-      end
-      context 'when the tweet is incorrect' do
-        context 'when the tweet does not exist' do
-          let(:tweet_id) { 'invalid_id' }
-
-          it 'returns a not found response' do
-            expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
-          end
+        it 'returns a not found response' do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
     end

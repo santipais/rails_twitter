@@ -7,11 +7,11 @@ RSpec.describe 'POST /tweets/:tweet_id/likes', type: :request do
   let!(:tweet) { create(:tweet) }
   let(:tweet_id) { tweet.id }
 
-  before { sign_in user }
-
   subject { post tweet_likes_path(tweet_id) }
 
-  context 'when the params are correct' do
+  context 'when the user is authenticated' do
+    before { sign_in user }
+
     context 'when user likes another user tweet' do
       context 'when the tweet was not liked' do
         it 'returns a succsseful response' do
@@ -50,13 +50,24 @@ RSpec.describe 'POST /tweets/:tweet_id/likes', type: :request do
         expect { subject }.not_to change(Like, :count)
       end
     end
+
+    context 'when the tweet_id is incorrect' do
+      let(:tweet_id) { 'invalid_id' }
+
+      it 'returns a not found response' do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 
-  context 'when the params are incorrect' do
-    let(:tweet_id) { 'invalid_id' }
+  context 'when the user is not authenticated' do
+    it 'returns an unauthorized response' do
+      subject
+      expect(response).to redirect_to(new_user_session_path)
+    end
 
-    it 'returns a not found response' do
-      expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+    it 'does not delete the like' do
+      expect { subject }.not_to change(Like, :count)
     end
   end
 end
