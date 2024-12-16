@@ -6,7 +6,7 @@ RSpec.describe Follow, type: :model do
   subject { build(:follow) }
 
   describe 'validations' do
-    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:followed_id).with_message(I18n.t('errors.follows.already_followed')) }
+    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:followed_id).with_message('is already following this user.') }
 
     context 'when a user follows another user' do
       let(:user) { create(:user) }
@@ -22,7 +22,7 @@ RSpec.describe Follow, type: :model do
 
         it 'is invalid' do
           expect(follow.valid?).to eq(false)
-          expect(follow.errors.full_messages).to include("Users #{I18n.t('errors.follows.self')}")
+          expect(follow.errors.full_messages).to include('Users cannot follow themselves.')
         end
       end
     end

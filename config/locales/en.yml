@@ -31,10 +31,18 @@
 
 en:
   hello: "Hello world"
-  errors:
-    likes:
-      own_tweet: "cannot like their own tweet."
-      already_liked: "has already liked this tweet."
-    follows:
-      self: "cannot follow themselves."
-      already_followed: "is already following this user."
+  activerecord:
+    errors:
+      models:
+        follow:
+          attributes:
+            base:
+              cannot_follow_self: "Users cannot follow themselves."
+            user_id:
+              already_followed: "is already following this user."
+        like:
+          attributes:
+            base:
+              cannot_like_own_tweet: "Users cannot like their own tweets."
+            user_id:
+              already_liked: "has already liked this tweet."
