@@ -5,7 +5,7 @@
         <% end %>
     <% else %>
         <% if current_user_liked_tweet?(tweet) %>
-            <%= button_to like_path(current_user_like(tweet)), method: :delete do %>
+            <%= button_to tweet_like_path(tweet, current_user_like(tweet)), method: :delete do %>
                 <%= image_tag "like.png", class: "h-3.5 w-3.5" %>
             <% end %>
         <% else %>

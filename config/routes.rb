@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   end
   resource :user, only: %i[edit update], controller: :user, as: :update_user
   resources :tweets do
-    resources :likes, only: :create
+    resources :likes, only: %i[create destroy]
   end
-  resources :likes, only: :destroy
 end
