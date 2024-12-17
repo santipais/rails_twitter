@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :followers_users, through: :followers, source: :user
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
-  validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_sensitive: false }
+  validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_]*\z/ }
   validates :encrypted_password, presence: true, if: :confirmed? || :password_required?
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }
   validates :bio, length: { maximum: 160 }
@@ -46,6 +46,10 @@ class User < ApplicationRecord
 
   def to_param
     username
+  end
+
+  def following?(user)
+    following_users.include?(user)
   end
 
   private
