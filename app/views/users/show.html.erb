@@ -26,13 +26,13 @@
                 <%= image_tag "profile.png", class: "rounded-full w-32 h-32 absolute border-4 border-[#17202a]"%>
                 </div>
                 <div class="w-[112px] h-[39px] mr-3 ml-auto pt-2">
-                    <%if current_user.present? %>
-                        <%if current_user?(@user)%>
+                    <% if current_user.present? %>
+                        <% if current_user?(@user)%>
                             <%= button_to "Edit Profile", edit_update_user_path, method: :get, data: {turbo_frame: "edit_modal"}, class: "w-[112px] h-[39px] border border-sky-500 rounded-full text-center text-sky-500 font-semibold text-sm"%>
-                        <%else%>
-                            <%= render "follows/follow", user: @user, following_user: @following_user%>
-                        <%end%>
-                    <%end%>
+                        <% else %>
+                            <%= render "follow", user: @user, following_user: @following_user%>
+                        <% end %>
+                    <% end %>
                 </div>
             </div>
             <p class="pt-[30px] pl-2 text-xl font-bold">
