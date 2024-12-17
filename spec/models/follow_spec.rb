@@ -29,7 +29,7 @@ RSpec.describe Follow, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:user) }
-    it { is_expected.to belong_to(:followed).class_name('User') }
+    it { is_expected.to belong_to(:user).counter_cache(true) }
+    it { is_expected.to belong_to(:followed).class_name('User').counter_cache(:followers_count) }
   end
 end

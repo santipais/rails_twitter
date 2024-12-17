@@ -18,3 +18,6 @@ users1.each do |u|
   FactoryBot.create(:follow, user: u, followed: user)
   FactoryBot.create(:follow, user: user, followed: u)
 end
+10.times do
+  FactoryBot.create(:follow, followed: user)
+end

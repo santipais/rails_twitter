@@ -18,7 +18,7 @@ RSpec.describe 'DELETE users/:user_id/follow', type: :request do
 
         it 'returns a successful response' do
           subject
-          expect(response).to have_http_status(:successful)
+          expect(response).to have_http_status(:found)
         end
 
         it 'deletes the follow' do

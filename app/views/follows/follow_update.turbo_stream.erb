@@ -1,0 +1,3 @@
+<%= turbo_stream.update "#{dom_id(@user)}_followers", @user.followers_count %>
+
+<%= turbo_stream.replace "#{dom_id(@user)}_follow", partial: 'follow', locals: { user: @user, following_user: following_user } %>

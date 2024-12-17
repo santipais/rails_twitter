@@ -16,7 +16,7 @@ RSpec.describe 'POST /users/:user_id/follow', type: :request do
       context 'when the user was not followed' do
         it 'returns a succsseful response' do
           subject
-          expect(response).to have_http_status(:successful)
+          expect(response).to have_http_status(:found)
         end
 
         it 'creates the follow' do
