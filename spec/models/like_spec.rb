@@ -6,7 +6,7 @@ RSpec.describe Like, type: :model do
   subject { build(:like) }
 
   describe 'validations' do
-    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:tweet_id).with_message(I18n.t('errors.likes.already_liked')) }
+    it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:tweet_id).with_message('has already liked this tweet.') }
 
     context 'when user likes a tweet' do
       let(:user) { create(:user) }
@@ -24,7 +24,7 @@ RSpec.describe Like, type: :model do
 
         it 'is invalid' do
           expect(like.valid?).to eq(false)
-          expect(like.errors.full_messages).to include("Users #{I18n.t('errors.likes.own_tweet')}")
+          expect(like.errors.full_messages).to include('Users cannot like their own tweets.')
         end
       end
     end
