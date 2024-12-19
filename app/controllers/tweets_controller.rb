@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TweetsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @tweets = Tweet.includes(:user, :likes, :likers).order(created_at: :desc)

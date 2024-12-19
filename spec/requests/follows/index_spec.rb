@@ -12,8 +12,8 @@ RSpec.describe 'GET users/:user_id/follows', type: :request do
   context 'when current_user is present' do
     let(:current_user) { create(:user) }
 
-    before { create(:follow, user: current_user, followed: user.following_users.last) }
-    before { create(:follow, user: current_user, followed: user.followers_users.last) }
+    before { create(:follow, user: current_user, followed: user.reload.following_users.last) }
+    before { create(:follow, user: current_user, followed: user.reload.followers_users.last) }
     before { sign_in current_user }
 
     context 'when no params are provided' do
@@ -24,17 +24,17 @@ RSpec.describe 'GET users/:user_id/follows', type: :request do
 
       it 'assigns the following_users of user to @follows_user' do
         subject
-        expect(follow_users).to eq(user.following_users)
+        expect(follow_users).to eq(user.reload.following_users)
       end
 
       it 'assigns the followed_by_current_user to true for the user followed by current_user' do
         subject
-        expect(follow_users.last.followed_by_current_user).to be_truthy
+        expect(follow_users.last.followed_by_current_user).to eq(true)
       end
 
       it 'assigns the followed_by_current_user to false for the user not followed by current_user' do
         subject
-        expect(follow_users.first.followed_by_current_user).to be_falsey
+        expect(follow_users.first.followed_by_current_user).to eq(false)
       end
     end
 
@@ -51,17 +51,17 @@ RSpec.describe 'GET users/:user_id/follows', type: :request do
 
         it 'assigns the followers_users of user to @follows_user' do
           subject
-          expect(follow_users).to eq(user.followers_users)
+          expect(follow_users).to eq(user.reload.followers_users)
         end
 
         it 'assigns the followed_by_current_user to true for the user followed by current_user' do
           subject
-          expect(follow_users.last.followed_by_current_user).to be_truthy
+          expect(follow_users.last.followed_by_current_user).to eq(true)
         end
 
         it 'assigns the followed_by_current_user to false for the user not followed by current_user' do
           subject
-          expect(follow_users.first.followed_by_current_user).to be_falsey
+          expect(follow_users.first.followed_by_current_user).to eq(false)
         end
       end
 
@@ -75,17 +75,17 @@ RSpec.describe 'GET users/:user_id/follows', type: :request do
 
         it 'assigns the following_users of user to @follows_user' do
           subject
-          expect(follow_users).to eq(user.following_users)
+          expect(follow_users).to eq(user.reload.following_users)
         end
 
         it 'assigns the followed_by_current_user to true for the user followed by current_user' do
           subject
-          expect(follow_users.last.followed_by_current_user).to be_truthy
+          expect(follow_users.last.followed_by_current_user).to eq(true)
         end
 
         it 'assigns the followed_by_current_user to false for the user not followed by current_user' do
           subject
-          expect(follow_users.first.followed_by_current_user).to be_falsey
+          expect(follow_users.first.followed_by_current_user).to eq(false)
         end
       end
     end
@@ -100,12 +100,12 @@ RSpec.describe 'GET users/:user_id/follows', type: :request do
 
       it 'assigns the following_users of user to @follows_user' do
         subject
-        expect(follow_users).to eq(user.following_users)
+        expect(follow_users).to eq(user.reload.following_users)
       end
 
       it 'assigns the followed_by_current_user to false for all the follow_users' do
         subject
-        expect(follow_users.sample.followed_by_current_user).to be_falsey
+        expect(follow_users.sample.followed_by_current_user).to eq(false)
       end
     end
 
@@ -120,12 +120,12 @@ RSpec.describe 'GET users/:user_id/follows', type: :request do
 
         it 'assigns the followers_users of user to @follows_user' do
           subject
-          expect(follow_users).to eq(user.followers_users)
+          expect(follow_users).to eq(user.reload.followers_users)
         end
 
         it 'assigns the followed_by_current_user to false for all the follow_users' do
           subject
-          expect(follow_users.sample.followed_by_current_user).to be_falsey
+          expect(follow_users.sample.followed_by_current_user).to eq(false)
         end
       end
 
@@ -139,12 +139,12 @@ RSpec.describe 'GET users/:user_id/follows', type: :request do
 
         it 'assigns the following_users of user to @follows_user' do
           subject
-          expect(follow_users).to eq(user.following_users)
+          expect(follow_users).to eq(user.reload.following_users)
         end
 
         it 'assigns the followed_by_current_user to false for all the follow_users' do
           subject
-          expect(follow_users.sample.followed_by_current_user).to be_falsey
+          expect(follow_users.sample.followed_by_current_user).to eq(false)
         end
       end
     end

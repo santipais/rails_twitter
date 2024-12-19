@@ -1,4 +1,4 @@
-<%=turbo_frame_tag dom_id(user) do%>
+<%= turbo_frame_tag dom_id(user) do %>
     <div class="w-full h-auto border">
         <div class="w-full flex flex-row my-3 mx-4">
             <div class="pr-3 shrink-0">
@@ -13,7 +13,7 @@
                     </div>
                     <div class="text-[#5b7083] text-sm font-normal ml-auto">
                         <% if current_user.present? %>
-                            <%= render "users/follow", user: user, following_user: user.followed_by_current_user %>
+                            <%= render "follows/follow", user: user, following_user: user.followed_by_current_user unless current_user?(user) %>
                         <% end %>
                     </div>
                 <div class="break-words">
@@ -22,4 +22,4 @@
             </div>
         </div>
     </div>
-<%end%>
+<% end %>
