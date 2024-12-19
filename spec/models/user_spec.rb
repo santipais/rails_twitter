@@ -17,6 +17,8 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_length_of(:last_name).is_at_least(2) }
     it { is_expected.to allow_value('test@example.com').for(:email) }
     it { is_expected.not_to allow_value('invalid_email').for(:email) }
+    it { is_expected.to allow_value('username').for(:username) }
+    it { is_expected.not_to allow_value('invalid/username').for(:username) }
     it { is_expected.to allow_value('https://validwebsite.com').for(:website) }
     it { is_expected.not_to allow_value('https://invalid.website.com').for(:website) }
 

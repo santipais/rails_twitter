@@ -53,6 +53,21 @@
     @apply [&>*]:!border-rose-500 [&>*]:!border-2;
   }
 
+  .follow-button {
+    @apply relative  w-[112px] h-[39px] border border-sky-500 rounded-full text-center text-sky-500 font-semibold text-sm ;
+  }
+  
+  .follow-button .hover-text {
+    @apply hidden;
+  }
+  
+  .follow-button:hover .default-text {
+    @apply hidden;
+  }
+  
+  .follow-button:hover .hover-text {
+    @apply inline;
+  }
   .alert {
    @apply bg-red-300 rounded-md text-red-800 px-4 py-2 text-center; 
   }
