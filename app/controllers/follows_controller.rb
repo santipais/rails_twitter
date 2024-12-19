@@ -7,7 +7,10 @@ class FollowsController < ApplicationController
     follow = current_user.follows.new(followed: @user)
 
     if follow.save
-      render partial: 'users/follow', locals: { user: @user, following_user: true }
+      respond_to do |format|
+        format.html { redirect_to user_path(@user) }
+        format.turbo_stream { render 'follow_update', locals: { user: @user, following_user: true } }
+      end
     else
       redirect_to user_path(@user), status: :unprocessable_entity
     end
@@ -16,7 +19,11 @@ class FollowsController < ApplicationController
   def destroy
     follow = current_user.follows.find_by!(followed: @user)
     follow.destroy
-    render partial: 'users/follow', locals: { user: @user, following_user: false }
+    @user.reload
+    respond_to do |format|
+      format.html { redirect_to user_path(@user) }
+      format.turbo_stream { render 'follow_update', locals: { user: @user, following_user: false } }
+    end
   end
 
   private
