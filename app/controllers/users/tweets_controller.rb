@@ -3,6 +3,7 @@
 module Users
   class TweetsController < ApplicationController
     before_action :set_user
+    skip_before_action :authenticate_user!
 
     def index
       @tweets = @user.tweets.includes(:likers).order(created_at: :desc)

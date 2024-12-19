@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class LikesController < ApplicationController
-  before_action :authenticate_user!
-
   def create
     like = tweet.likes.new(user_id: current_user.id)
 

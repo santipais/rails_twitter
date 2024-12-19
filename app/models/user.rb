@@ -10,9 +10,9 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_tweets, through: :likes, source: :tweet
   has_many :follows, dependent: :destroy
-  has_many :following_users, through: :follows, source: :followed
+  has_many :following_users, -> { order(created_at: :desc) }, through: :follows, source: :followed
   has_many :followers, foreign_key: :followed_id, class_name: 'Follow', dependent: :destroy, inverse_of: :followed
-  has_many :followers_users, through: :followers, source: :user
+  has_many :followers_users, -> { order(created_at: :desc) }, through: :followers, source: :user
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
   validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_]*\z/ }
