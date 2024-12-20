@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :liked_tweets, through: :likes, source: :tweet
   has_many :follows, dependent: :destroy
   has_many :following_users, -> { order(created_at: :desc) }, through: :follows, source: :followed
+  has_many :following_users_tweets, through: :following_users, source: :tweets
+  has_many :following_users_likes, through: :following_users, source: :likes
+
   has_many :followers, foreign_key: :followed_id, class_name: 'Follow', dependent: :destroy, inverse_of: :followed
   has_many :followers_users, -> { order(created_at: :desc) }, through: :followers, source: :user
 
