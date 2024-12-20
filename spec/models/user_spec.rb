@@ -41,5 +41,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:following_users).through(:follows).source(:followed) }
     it { is_expected.to have_many(:followers).with_foreign_key(:followed_id).class_name('Follow').dependent(:destroy).inverse_of(:followed) }
     it { is_expected.to have_many(:followers_users).through(:followers).source(:user) }
+    it { is_expected.to have_many(:following_users_tweets).through(:following_users).source(:tweets) }
+    it { is_expected.to have_many(:following_users_likes).through(:following_users).source(:likes) }
   end
 end
