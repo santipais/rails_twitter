@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   has_many :followers, foreign_key: :followed_id, class_name: 'Follow', dependent: :destroy, inverse_of: :followed
   has_many :followers_users, -> { order(created_at: :desc) }, through: :followers, source: :user
+  has_one_attached :profile_image
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
   validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_]*\z/ }
@@ -25,6 +26,7 @@ class User < ApplicationRecord
   validates :website, format: { with: %r{https?://(www.)?[^\W]*\.com} }, allow_blank: true
   validates :birthdate, comparison: { less_than: 18.years.ago }
   validate  :validate_password_confirmation, unless: :password_required?
+  validate  :validate_acceptable_image
 
   def full_name
     "#{first_name} #{last_name}"
@@ -56,6 +58,16 @@ class User < ApplicationRecord
   end
 
   private
+
+  def validate_acceptable_image
+    return unless profile_image.attached?
+
+    errors.add(:profile_image, :big) unless profile_image.blob.byte_size <= 1.megabyte
+    acceptable_types = ['image/png', 'image/jpeg']
+    return if acceptable_types.include?(profile_image.blob.content_type)
+
+    errors.add(:profile_image, :type)
+  end
 
   def validate_password_confirmation
     return if password.blank? && password_confirmation.blank?

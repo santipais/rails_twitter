@@ -1,7 +1,7 @@
 <div class="w-[600px] h-auto py-4 border">
     <div class="flex flex-row mx-4">
         <div class="pr-3 shrink-0">
-            <%= link_to (image_tag "profile.png", class: "w-12 h-12 mt-1 rounded-full"), user_path(new_tweet.user), data: {turbo_frame: "_top"}  %>
+            <%= link_to (image_tag profile_image(new_tweet.user), class: "w-12 h-12 mt-1 rounded-full"), user_path(new_tweet.user), data: {turbo_frame: "_top"}  %>
         </div>
         <div class="w-full">
             <%= form_with(model: new_tweet, url: tweets_path, html: { class: "flex flex-col"}, id: "tweet_form" ) do |f| %>

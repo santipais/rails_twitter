@@ -9,11 +9,12 @@ RSpec.describe 'PUT /user', type: :request do
   let(:last_name) { 'Name' }
   let(:birthdate) { '01/01/1999' }
   let(:website) { 'https://newwebsite.com' }
+  let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/profile.png'), 'image/png') }
   before { sign_in user }
 
   let(:params) do
     {
-      user: { bio:, website:, birthdate:, first_name:, last_name: }
+      user: { bio:, website:, birthdate:, first_name:, last_name:, profile_image: }
     }
   end
 
@@ -27,12 +28,12 @@ RSpec.describe 'PUT /user', type: :request do
 
     it 'returns the user' do
       subject
-
       expect(user.birthdate.to_date).to eq(birthdate.to_date)
       expect(user.first_name).to eq(first_name)
       expect(user.last_name).to eq(last_name)
       expect(user.website).to eq(website)
       expect(user.bio).to eq(bio)
+      expect(user.profile_image).to be_attached
     end
 
     it 'does not creates a user' do

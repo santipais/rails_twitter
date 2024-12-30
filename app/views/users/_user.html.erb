@@ -2,7 +2,7 @@
     <div class="w-full h-auto border">
         <div class="w-full flex flex-row my-3 mx-4">
             <div class="pr-3 shrink-0">
-                <%= link_to (image_tag "profile.png", class: "w-12 h-12 rounded-full"), user_path(user), data: {turbo_frame: "_top"} %>
+                <%= link_to (image_tag profile_image(user), class: "w-12 h-12 rounded-full border "), user_path(user), data: {turbo_frame: "_top"} %>
             </div>
             <div class="w-[500px] flex flex-col">
                     <div class="font-semibold text-base pr-1">

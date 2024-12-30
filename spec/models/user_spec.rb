@@ -43,5 +43,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:followers_users).through(:followers).source(:user) }
     it { is_expected.to have_many(:following_users_tweets).through(:following_users).source(:tweets) }
     it { is_expected.to have_many(:following_users_likes).through(:following_users).source(:likes) }
+    it { is_expected.to have_one_attached(:profile_image) }
   end
 end
