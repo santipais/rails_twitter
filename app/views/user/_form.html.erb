@@ -9,7 +9,8 @@
         <div class="flex flex-col justify-center relative ml-4">
             <div class="flex flex-row">
                 <div class="-mt-16">
-                <%= image_tag "profile.png", class: "rounded-full w-32 h-32 absolute border-4 border-[#17202a]"%>
+                <%= image_tag profile_image(user), class: "bg-white rounded-full w-32 h-32 absolute border-4 border-[#17202a]" %>
+                <%= f.file_field :profile_image, class: "rounded-full w-32 h-32 absolute opacity-0 cursor-pointer" %>
                 </div>
             </div>
         </div>

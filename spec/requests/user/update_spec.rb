@@ -9,11 +9,12 @@ RSpec.describe 'PUT /user', type: :request do
   let(:last_name) { 'Name' }
   let(:birthdate) { '01/01/1999' }
   let(:website) { 'https://newwebsite.com' }
+  let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/profile.png'), 'image/png') }
   before { sign_in user }
 
   let(:params) do
     {
-      user: { bio:, website:, birthdate:, first_name:, last_name: }
+      user: { bio:, website:, birthdate:, first_name:, last_name:, profile_image: }
     }
   end
 
@@ -27,12 +28,12 @@ RSpec.describe 'PUT /user', type: :request do
 
     it 'returns the user' do
       subject
-
       expect(user.birthdate.to_date).to eq(birthdate.to_date)
       expect(user.first_name).to eq(first_name)
       expect(user.last_name).to eq(last_name)
       expect(user.website).to eq(website)
       expect(user.bio).to eq(bio)
+      expect(user.profile_image).to be_attached
     end
 
     it 'does not creates a user' do
@@ -115,6 +116,44 @@ RSpec.describe 'PUT /user', type: :request do
 
       it 'does not create a user' do
         expect { subject }.not_to change(User, :count)
+      end
+    end
+
+    context 'when the profile image is invalid' do
+      context 'when the profile image is too big' do
+        let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/big.png'), 'image/png') }
+
+        it 'returns an unprocessable entity response' do
+          subject
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'returns an error message' do
+          subject
+          expect(user.errors['profile_image']).to include('Profile image must be less than 1MB.')
+        end
+
+        it 'does not create a user' do
+          expect { subject }.not_to change(User, :count)
+        end
+      end
+
+      context 'when the profile image is invalid type' do
+        let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/profile.txt'), 'text/plain') }
+
+        it 'returns an unprocessable entity response' do
+          subject
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'returns an error message' do
+          subject
+          expect(user.errors['profile_image']).to include('Profile image must be of type jpg or png.')
+        end
+
+        it 'does not create a user' do
+          expect { subject }.not_to change(User, :count)
+        end
       end
     end
   end

@@ -30,6 +30,6 @@ class UserController < ApplicationController
 
   def user_params
     params.require(:user)
-          .permit(:first_name, :last_name, :bio, :website, :birthdate)
+          .permit(:first_name, :last_name, :bio, :website, :birthdate, :profile_image)
   end
 end

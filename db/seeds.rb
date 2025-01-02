@@ -10,9 +10,11 @@
 user = FactoryBot.create(:user, username: 'test', email: 'test@example.com', password: 'secret', password_confirmation: 'secret', first_name: 'Test')
 users1 = FactoryBot.create_list(:user, 5)
 users2 = FactoryBot.create_list(:user, 5)
-FactoryBot.create_list(:tweet, 5, user: users1.sample)
+user1 = users1.sample
+user2 = users2.sample
+FactoryBot.create_list(:tweet, 5, user: user1)
 FactoryBot.create_list(:tweet, 5, user: user)
-tweets = FactoryBot.create_list(:tweet, 5, user: users2.sample)
+tweets = FactoryBot.create_list(:tweet, 5, user: user2)
 users1.each do |u|
   FactoryBot.create(:like, user: u, tweet: tweets.sample)
   FactoryBot.create(:follow, user: u, followed: user)
@@ -21,3 +23,9 @@ end
 10.times do
   FactoryBot.create(:follow, followed: user)
 end
+file1 = Rails.root.join('app/assets/images/realruby.jpg').open
+file2 = Rails.root.join('app/assets/images/rails.png').open
+file3 = Rails.root.join('app/assets/images/rubygem.png').open
+user.profile_image.attach(io: file1, filename: 'realruby.jpg')
+user1.profile_image.attach(io: file2, filename: 'rails.png')
+user2.profile_image.attach(io: file3, filename: 'rubygem.png')

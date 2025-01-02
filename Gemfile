@@ -7,6 +7,7 @@ ruby '3.3.4'
 
 gem 'rails', '~> 7.0.8', '>= 7.0.8.6'
 
+gem 'active_storage_validations', '~> 1.1', '>= 1.1.4'
 gem 'blueprinter', '~> 1.1', '>= 1.1.2'
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
