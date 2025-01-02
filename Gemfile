@@ -11,6 +11,7 @@ gem 'blueprinter', '~> 1.1', '>= 1.1.2'
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
 gem 'importmap-rails'
+gem 'pagy', '~> 9.3'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'

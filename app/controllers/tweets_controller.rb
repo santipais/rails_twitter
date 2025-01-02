@@ -4,11 +4,15 @@ class TweetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @tweets = Tweet.includes(:user, :likes, :likers).feed(current_user).order(created_at: :desc)
+    tweets = Tweet.includes(:user, :likes, :likers).feed(current_user).order(created_at: :desc)
+    @pagy, @tweets = pagy_countless(tweets, limit: 5)
+    pagy_headers_merge(@pagy)
+    @new_tweet = current_user.tweets.new if current_user.present?
 
-    return if current_user.blank?
-
-    @new_tweet = current_user.tweets.new
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def new

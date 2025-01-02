@@ -3,11 +3,14 @@
     <% if current_user.present? %>
         <%= turbo_frame_tag "new_tweet" do %>
             <%= render "form", new_tweet: @new_tweet%>
-        <%end%>
-    <%end%>
-    <% @tweets.each do |tweet|%>
-        <%= render "tweet", tweet: tweet %>
-    <%end%>
+        <% end %>
+    <% end %>
+    <%= turbo_frame_tag "tweets" do %>
+        <%= render @tweets %>
+    <% end %>
+    <% if @pagy.next.present? %>
+        <%= turbo_frame_tag "pagination", loading: :lazy, src: tweets_path(format: :turbo_stream, page: @pagy.next) %>
+    <% end %>
 </div>
 <div class="flex w-[350px] h-full flex-col items-start gap-[15px] shrink-0 pt-2.5 pl-1">
     <div class="w-full h-[39px]">
