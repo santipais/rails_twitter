@@ -21,6 +21,9 @@ RSpec.describe User, type: :model do
     it { is_expected.not_to allow_value('invalid/username').for(:username) }
     it { is_expected.to allow_value('https://validwebsite.com').for(:website) }
     it { is_expected.not_to allow_value('https://invalid.website.com').for(:website) }
+    it { is_expected.to validate_size_of(:profile_image).less_than(1.megabyte) }
+    it { is_expected.to validate_content_type_of(:profile_image).allowing('image/png', 'image/jpeg') }
+    it { is_expected.to validate_content_type_of(:profile_image).rejecting('text/plain', 'text/xml') }
 
     context 'when user is not confirmed' do
       subject { build(:user, :unconfirmed) }

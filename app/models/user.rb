@@ -25,8 +25,8 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 160 }
   validates :website, format: { with: %r{https?://(www.)?[^\W]*\.com} }, allow_blank: true
   validates :birthdate, comparison: { less_than: 18.years.ago }
+  validates :profile_image, content_type: { in: ['image/png', 'image/jpeg'], message: :type }, size: { less_than: 1.megabyte, message: :big }
   validate  :validate_password_confirmation, unless: :password_required?
-  validate  :validate_acceptable_image
 
   def full_name
     "#{first_name} #{last_name}"
@@ -58,16 +58,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def validate_acceptable_image
-    return unless profile_image.attached?
-
-    errors.add(:profile_image, :big) unless profile_image.blob.byte_size <= 1.megabyte
-    acceptable_types = ['image/png', 'image/jpeg']
-    return if acceptable_types.include?(profile_image.blob.content_type)
-
-    errors.add(:profile_image, :type)
-  end
 
   def validate_password_confirmation
     return if password.blank? && password_confirmation.blank?

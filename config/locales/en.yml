@@ -46,3 +46,8 @@ en:
               cannot_like_own_tweet: "Users cannot like their own tweets."
             user_id:
               already_liked: "has already liked this tweet."
+        user:
+          attributes:
+            profile_image:
+              type: "Profile image must be of type jpg or png."
+              big: "Profile image must be less than 1MB."

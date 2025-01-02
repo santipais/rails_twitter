@@ -118,5 +118,43 @@ RSpec.describe 'PUT /user', type: :request do
         expect { subject }.not_to change(User, :count)
       end
     end
+
+    context 'when the profile image is invalid' do
+      context 'when the profile image is too big' do
+        let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/big.png'), 'image/png') }
+
+        it 'returns an unprocessable entity response' do
+          subject
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'returns an error message' do
+          subject
+          expect(user.errors['profile_image']).to include('Profile image must be less than 1MB.')
+        end
+
+        it 'does not create a user' do
+          expect { subject }.not_to change(User, :count)
+        end
+      end
+
+      context 'when the profile image is invalid type' do
+        let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/profile.txt'), 'text/plain') }
+
+        it 'returns an unprocessable entity response' do
+          subject
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it 'returns an error message' do
+          subject
+          expect(user.errors['profile_image']).to include('Profile image must be of type jpg or png.')
+        end
+
+        it 'does not create a user' do
+          expect { subject }.not_to change(User, :count)
+        end
+      end
+    end
   end
 end
