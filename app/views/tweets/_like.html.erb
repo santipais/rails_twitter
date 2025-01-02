@@ -1,4 +1,4 @@
-<div class="flex flex-row items-center pt-10">
+<div class="flex flex-row items-center pt-3">
     <% if current_user.blank? %>
         <%= link_to new_user_session_path, data: {turbo_frame: "_top"} do %>
             <%= image_tag "unlike.png", class: "h-3.5 w-3.5" %>

@@ -19,6 +19,15 @@
                 <div class="break-words">
                     <%= tweet.content %>
                 </div>
+                <% if tweet.images.attached? %>
+                    <div class="w-full pt-2 items-center gap-x-4 flex flex-row">
+                        <% tweet.images.each do |image| %>
+                            <div class="">
+                                <%= image_tag(image, class: "border rounded-[16px]")%>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
                 <%= render "tweets/like", tweet: tweet %>
             </div>
         </div>

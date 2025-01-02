@@ -7,7 +7,13 @@
             <%= form_with(model: new_tweet, url: tweets_path, html: { class: "flex flex-col"}, id: "tweet_form" ) do |f| %>
                 <%= f.text_area :content, autocomplete: "content", placeholder: "What's happening?", class: "border-none focus:outline-none focus:ring-0 focus:border-none placeholder:text-lg", maxlength: 280, rows: 5, cols:49, style: "resize: none;" %>            
                 <%= render "devise/shared/error_messages", resource: new_tweet, field: 'content' %>
-                <%= f.submit "Tweet", class: "w-20 h-10 btn btn-primary btn-sm py-0 ml-auto" %>
+                <div class="flex flex-row">
+                    <div class="w-5 h-5 mt-3 hover:bg-sky-100">
+                        <%= f.file_field :images, multiple: true, class: "w-5 h-5 absolute opacity-0" %>
+                        <%= image_tag "file_upload.png", class: "w-5 h-5" %>
+                    </div>
+                    <%= f.submit "Tweet", class: "w-20 h-10 btn btn-primary btn-sm py-0 ml-auto" %>
+                </div>
             <% end %>
         </div>
     </div>
