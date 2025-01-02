@@ -9,7 +9,7 @@ RSpec.describe 'PUT /user', type: :request do
   let(:last_name) { 'Name' }
   let(:birthdate) { '01/01/1999' }
   let(:website) { 'https://newwebsite.com' }
-  let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/profile.png'), 'image/png') }
+  let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/image.png'), 'image/png') }
   before { sign_in user }
 
   let(:params) do
@@ -139,7 +139,7 @@ RSpec.describe 'PUT /user', type: :request do
       end
 
       context 'when the profile image is invalid type' do
-        let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/profile.txt'), 'text/plain') }
+        let(:profile_image) { fixture_file_upload(Rails.root.join('spec/support/assets/invalid.txt'), 'text/plain') }
 
         it 'returns an unprocessable entity response' do
           subject
