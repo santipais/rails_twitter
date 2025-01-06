@@ -1,0 +1,19 @@
+<% if @first_search %>
+    <%= turbo_stream.replace :tweets do %>
+        <%= turbo_frame_tag :tweets do%>
+            <%= render @tweets%>
+        <% end %>
+    <% end %>
+<% else %>
+    <%= turbo_stream.append :tweets do %>
+        <%= render @tweets %>
+    <% end %>
+<% end %>
+
+<%= turbo_stream.replace "pagination" do %>
+    <% if @pagy.next.present? %>
+        <%= turbo_frame_tag "pagination", loading: :lazy, src: search_tweets_path(format: :turbo_stream, page: @pagy.next, q: @q, following: @following) %>
+    <% else %>
+        <%= turbo_frame_tag "pagination" %>
+    <% end %>
+<% end %>

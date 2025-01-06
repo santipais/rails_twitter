@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TweetsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: :index
 
   def index
     tweets = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob }).feed(current_user).with_attached_images.order(created_at: :desc)
@@ -29,7 +29,25 @@ class TweetsController < ApplicationController
     end
   end
 
+  def search
+    @first_search = params[:page].blank?
+    @q = params[:q]
+    @following = params[:following]
+    tweets = filtered_tweets
+    @pagy, @tweets = pagy_countless(tweets, limit: 5)
+    respond_to do |format|
+      format.html { render :search }
+      format.turbo_stream { render :search }
+    end
+  end
+
   private
+
+  def filtered_tweets
+    base_query = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob })
+                      .where('content LIKE ?', "%#{params[:q]}%").excluding(current_user.tweets)
+    params[:following] == 'true' ? base_query.where(user_id: current_user.following_users) : base_query
+  end
 
   def tweet_params
     params.require(:tweet).permit(:content, images: [])

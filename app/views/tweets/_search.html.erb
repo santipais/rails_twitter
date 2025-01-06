@@ -1,0 +1,8 @@
+<%= form_with url: search_tweets_path(format: :turbo_stream), method: :get, local: true do |f| %>
+  <div class="pt-10 pl-3 flex items-center space-x-2">
+    <%= image_tag "search.png", class: "absolute pl-5" %>
+    <%= f.text_field :q, placeholder: "Search Twitter", class: "pl-9 w-[348px] h-10 rounded-full text-base font-normal" %>
+    <%= f.check_box :following, {}, "true", "false" %>
+    <%= f.submit "Search", class: "btn-primary hidden" %>
+  </div>
+<% end %>
