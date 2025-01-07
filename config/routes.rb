@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     resource :follow, only: %i[create destroy]
   end
   resource :user, only: %i[edit update], controller: :user, as: :update_user
-  resources :tweets do
+  resources :tweets, only: %i[index new create] do
+    get 'search', on: :collection
     resources :likes, only: %i[create destroy]
   end
 end

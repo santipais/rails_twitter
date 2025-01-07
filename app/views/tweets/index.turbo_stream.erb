@@ -5,5 +5,7 @@
 <%= turbo_stream.replace "pagination" do %>
     <% if @pagy.next.present? %>
         <%= turbo_frame_tag "pagination", loading: :lazy, src: tweets_path(format: :turbo_stream, page: @pagy.next) %>
+    <% else %>
+        <%= turbo_frame_tag "pagination" %>
     <% end %>
 <% end %>
