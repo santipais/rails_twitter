@@ -33,8 +33,8 @@ class TweetsController < ApplicationController
     @first_search = params[:page].blank?
     @q = params[:q]
     @following = params[:following]
-    tweets = filtered_tweets
-    @pagy, @tweets = pagy_countless(tweets, limit: 5)
+    @pagy, @tweets = pagy_countless(filtered_tweets.order(created_at: :desc), limit: 5)
+
     respond_to do |format|
       format.html { render :search }
       format.turbo_stream { render :search }
@@ -44,9 +44,12 @@ class TweetsController < ApplicationController
   private
 
   def filtered_tweets
-    base_query = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob })
-                      .where('content LIKE ?', "%#{params[:q]}%").excluding(current_user.tweets)
-    params[:following] == 'true' ? base_query.where(user_id: current_user.following_users) : base_query
+    tweets = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob })
+                  .where('content LIKE ?', "%#{params[:q]}%").excluding(current_user.tweets)
+
+    return tweets unless params[:following] == 'true'
+
+    tweets.where(user_id: current_user.following_users)
   end
 
   def tweet_params
