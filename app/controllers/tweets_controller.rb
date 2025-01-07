@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    tweets = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob }).feed(current_user).order(created_at: :desc)
+    tweets = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob }).feed(current_user).with_attached_images.order(created_at: :desc)
     @pagy, @tweets = pagy_countless(tweets, limit: 5)
     pagy_headers_merge(@pagy)
     @new_tweet = current_user.tweets.new if current_user.present?
@@ -32,6 +32,6 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content, images: [])
   end
 end

@@ -6,7 +6,7 @@ module Users
     skip_before_action :authenticate_user!
 
     def index
-      @tweets = @user.tweets.includes(:likers).order(created_at: :desc)
+      @tweets = @user.tweets.includes(:likers).with_attached_images.order(created_at: :desc)
       render partial: 'tweets', locals: { tweets: @tweets }
     end
 
