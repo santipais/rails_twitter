@@ -30,9 +30,9 @@ class TweetsController < ApplicationController
   end
 
   def search
-    @first_search = params[:page].blank?
-    @q = params[:q]
-    @following = params[:following]
+    @first_search = first_search?
+    @q = search_params[:q]
+    @following = ActiveModel::Type::Boolean.new.cast(search_params[:following])
     @pagy, @tweets = pagy_countless(filtered_tweets.order(created_at: :desc), limit: 5)
 
     respond_to do |format|
@@ -44,15 +44,22 @@ class TweetsController < ApplicationController
   private
 
   def filtered_tweets
-    tweets = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob }).with_attached_images
-                  .where('content LIKE ?', "%#{params[:q]}%").excluding(current_user.tweets)
+    tweets = Tweet.excluding(current_user.tweets)
+    tweets = tweets.where('content LIKE ?', "%#{@q}%") if @q.present?
+    tweets = tweets.where(user: current_user.following_users) if @following && current_user.present?
 
-    return tweets unless params[:following] == 'true'
-
-    tweets.where(user_id: current_user.following_users)
+    tweets.includes(:likes, :likers, user: { profile_image_attachment: :blob }).with_attached_images
   end
 
   def tweet_params
     params.require(:tweet).permit(:content, images: [])
+  end
+
+  def search_params
+    params.permit(:q, :following, :page)
+  end
+
+  def first_search?
+    search_params[:page].blank?
   end
 end
