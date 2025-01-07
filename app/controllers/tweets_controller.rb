@@ -44,7 +44,7 @@ class TweetsController < ApplicationController
   private
 
   def filtered_tweets
-    tweets = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob })
+    tweets = Tweet.includes(:likes, :likers, user: { profile_image_attachment: :blob }).with_attached_images
                   .where('content LIKE ?', "%#{params[:q]}%").excluding(current_user.tweets)
 
     return tweets unless params[:following] == 'true'
