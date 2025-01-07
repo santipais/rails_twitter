@@ -23,7 +23,12 @@ class TweetsController < ApplicationController
     @tweet = current_user.tweets.new(tweet_params)
 
     if @tweet.save
-      redirect_to root_path
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace('new_tweet', partial: 'tweets/form', locals: { new_tweet: current_user.tweets.new })
+        end
+      end
     else
       render :new, status: :unprocessable_entity
     end

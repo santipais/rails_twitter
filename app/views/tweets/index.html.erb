@@ -1,15 +1,15 @@
 <%= render "layouts/side_menu" %>
 <div class="flex flex-col overflow-y-scroll max-h-screen">
     <% if current_user.present? %>
-        <%= turbo_frame_tag "new_tweet" do %>
-            <%= render "form", new_tweet: @new_tweet %>
-        <% end %>
+        <%= render "form", new_tweet: @new_tweet %>
     <% end %>
     <%= turbo_frame_tag "tweets" do %>
         <%= render @tweets %>
     <% end %>
     <% if @pagy.next.present? %>
         <%= turbo_frame_tag "pagination", loading: :lazy, src: tweets_path(format: :turbo_stream, page: @pagy.next) %>
+    <% else %>
+        <%= turbo_frame_tag "pagination" %>
     <% end %>
 </div>
 <div class="flex w-[350px] h-full flex-col items-start gap-[15px] shrink-0 pt-2.5 pl-1">
