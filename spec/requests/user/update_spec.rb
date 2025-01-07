@@ -130,7 +130,7 @@ RSpec.describe 'PUT /user', type: :request do
 
         it 'returns an error message' do
           subject
-          expect(user.errors['profile_image']).to include('Profile image must be less than 1MB.')
+          expect(user.errors['profile_image']).to include('must be less than 1MB.')
         end
 
         it 'does not create a user' do
@@ -148,7 +148,7 @@ RSpec.describe 'PUT /user', type: :request do
 
         it 'returns an error message' do
           subject
-          expect(user.errors['profile_image']).to include('Profile image must be of type jpg or png.')
+          expect(user.errors['profile_image']).to include('must be of type jpg or png.')
         end
 
         it 'does not create a user' do

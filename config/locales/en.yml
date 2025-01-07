@@ -49,10 +49,10 @@ en:
         user:
           attributes:
             profile_image:
-              type: "Profile image must be of type jpg or png."
-              big: "Profile image must be less than 1MB."
+              type: "must be of type jpg or png."
+              big: "must be less than 1MB."
         tweet:
           attributes:
             images:
-              type: "Tweet images must be of type: jpeg, png or gif."
-              big: "Tweet images must be less than 1MB."
+              type: "must be of type: jpeg, png or gif."
+              big: "must be less than 1MB."

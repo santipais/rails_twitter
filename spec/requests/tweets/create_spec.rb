@@ -100,7 +100,7 @@ RSpec.describe 'POST /tweets', type: :request do
 
         it 'returns an error message' do
           subject
-          expect(user.tweets.last.errors['images']).to include('Tweet images must be less than 1MB.')
+          expect(user.tweets.last.errors['images']).to include('must be less than 1MB.')
         end
 
         it 'does not create a tweet' do
@@ -118,7 +118,7 @@ RSpec.describe 'POST /tweets', type: :request do
 
         it 'returns an error message' do
           subject
-          expect(user.tweets.last.errors['images']).to include('Tweet images must be of type: jpeg, png or gif.')
+          expect(user.tweets.last.errors['images']).to include('must be of type: jpeg, png or gif.')
         end
 
         it 'does not create a tweet' do

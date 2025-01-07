@@ -4,13 +4,16 @@
         <div class="font-semibold text-xl pl-10">Edit profile</div>
         <%= f.submit "Save", class: "btn btn-dark btn-sm py-0 ml-auto mr-6" %>
     </div>
-    <div class="w-full border">
+    <div class="w-full">
         <%= image_tag "cover.png", class: "w-full h-52 object-cover"%>
         <div class="flex flex-col justify-center relative ml-4">
             <div class="flex flex-row">
                 <div class="-mt-16">
                 <%= image_tag profile_image(user), class: "bg-white rounded-full w-32 h-32 absolute border-4 border-[#17202a]" %>
                 <%= f.file_field :profile_image, class: "rounded-full w-32 h-32 absolute opacity-0 cursor-pointer" %>
+                </div>
+                <div class="pl-32">
+                    <%= render "devise/shared/error_messages", resource: user, field: 'profile_image' %>
                 </div>
             </div>
         </div>
