@@ -320,7 +320,7 @@ DEPENDENCIES
   letter_opener (~> 1.10)
   pagy (~> 9.3)
   pg (~> 1.1)
-  pg_search
+  pg_search (~> 2.3, >= 2.3.6)
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.6)
   rspec-rails (~> 7.0, >= 7.0.1)
